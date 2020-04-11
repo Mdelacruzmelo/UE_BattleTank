@@ -6,7 +6,7 @@ An open world head-to-head tank fight with simple AI, terrain and advanced contr
 I'm also learning how to use visual studio thanks to the team of Udemy Unreal Engine course.
 
 ---
-[This](htpp://mdelacruzmelo.com) is my webpage, click there to find out more about me.
+[This](http://mdelacruzmelo.com) is my webpage, click there to find out more about me.
 
 ## Lecture List
 * BT01 Section introduction
