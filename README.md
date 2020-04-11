@@ -10,3 +10,4 @@ I'm also learning how to use visual studio thanks to the team of Udemy Unreal En
 
 ## Lecture List
 * BT01 Section introduction
+* BT02 Game Design Document (GDD)
