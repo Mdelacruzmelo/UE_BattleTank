@@ -1,6 +1,7 @@
 // BattleTank by Mdelacruzmelo
 
 #include "BattleTank.h"
+#include "Tank.h"
 #include "Engine/World.h"
 #include "Public/TankAIController.h"
 

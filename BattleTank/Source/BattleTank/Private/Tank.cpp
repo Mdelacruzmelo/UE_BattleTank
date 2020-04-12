@@ -1,6 +1,6 @@
 // BattleTank by Mdelacruzmelo
 
-
+#include "TankAimingComponent.h"
 #include "Public/Tank.h"
 
 // Sets default values
