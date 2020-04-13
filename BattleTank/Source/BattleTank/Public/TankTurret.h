@@ -6,12 +6,23 @@
 #include "Components/StaticMeshComponent.h"
 #include "TankTurret.generated.h"
 
-/**
- * 
- */
 UCLASS(meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
-	
+
+public:
+	// -1 is max downward movement, and +1 is max up movement
+	void Rotate(float RelativeSpeed);
+
+private:
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+		float MaxDegreesPerSecond = 125;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+		float MaxRotationDegrees = 360.f;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+		float MinRotationDegrees = 0.f;
 };
