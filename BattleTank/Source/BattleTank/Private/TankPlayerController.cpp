@@ -1,7 +1,6 @@
 // BattleTank by Mdelacruzmelo
 
 #include "BattleTank.h"
-#include "Tank.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "Public/TankPlayerController.h"
