@@ -8,6 +8,7 @@
 #include "Public/TankBarrel.h"
 #include "Public/TankTurret.h"
 #include "Public/TankAimingComponent.h"
+#include "Public/TankMovementComponent.h"
 #include "Tank.generated.h" // Put new includes above
 
 UCLASS()
@@ -35,6 +36,9 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 private:
 
