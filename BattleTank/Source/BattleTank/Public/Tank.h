@@ -7,7 +7,6 @@
 #include "Public/Proyectile.h"
 #include "Public/TankBarrel.h"
 #include "Public/TankTurret.h"
-#include "Public/TankAimingComponent.h"
 #include "Tank.generated.h" // Put new includes above
 
 UCLASS()
@@ -21,17 +20,11 @@ public:
 
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
-
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 		void Fire();
 
 protected:
 	virtual void BeginPlay() override;
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")

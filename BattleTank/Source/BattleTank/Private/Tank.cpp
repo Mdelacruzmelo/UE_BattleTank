@@ -1,7 +1,6 @@
 // BattleTank by Mdelacruzmelo
 
 #include "Public/Tank.h"
-#include "TankAimingComponent.h"
 #include "Engine/World.h"
 
 // Sets default values
@@ -11,25 +10,10 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-void ATank::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->Initialise(BarrelToSet, TurretToSet);
-	Barrel = BarrelToSet;
-}
-
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-}
-
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(!TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
