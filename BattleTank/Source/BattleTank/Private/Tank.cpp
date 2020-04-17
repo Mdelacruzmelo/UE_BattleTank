@@ -13,6 +13,7 @@ ATank::ATank()
 
 void ATank::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->Initialise(BarrelToSet, TurretToSet);
 	Barrel = BarrelToSet;
 }
@@ -22,10 +23,12 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATank::AimAt(FVector HitLocation)
 {
+	if (!ensure(!TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
@@ -33,7 +36,9 @@ void ATank::Fire()
 {
 	bool isRealoaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 
-	if (Barrel && isRealoaded)
+	if (!ensure(Barrel)) { return; }
+
+	if (isRealoaded)
 	{
 		auto SocketLocation = Barrel->GetSocketLocation(FName("Projectile"));
 		auto SocketRotation = Barrel->GetSocketRotation(FName("Projectile"));

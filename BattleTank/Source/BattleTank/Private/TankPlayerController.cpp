@@ -10,8 +10,9 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	auto ControlledTank = GetControlledTank();
+	UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
+	FoundAimingComponent(AimingComponent);
 
 }
 
@@ -19,7 +20,6 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimTowardsCrosshair();
-
 }
 
 
@@ -31,7 +31,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 // Start the tan movin the barrel so that a shot would it where the crosshair inersects the world
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!GetControlledTank()) { return; }
+	if (!ensure(!GetControlledTank())) { return; }
 
 	FVector HitLocation; // OUT Parameter
 

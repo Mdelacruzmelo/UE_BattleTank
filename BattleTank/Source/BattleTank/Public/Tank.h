@@ -8,7 +8,6 @@
 #include "Public/TankBarrel.h"
 #include "Public/TankTurret.h"
 #include "Public/TankAimingComponent.h"
-#include "Public/TankMovementComponent.h"
 #include "Tank.generated.h" // Put new includes above
 
 UCLASS()
@@ -33,9 +32,6 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
