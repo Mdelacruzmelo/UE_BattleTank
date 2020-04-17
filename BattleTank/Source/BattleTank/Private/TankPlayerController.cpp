@@ -1,10 +1,9 @@
 // BattleTank by Mdelacruzmelo
 
 #include "BattleTank.h"
-#include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
-#include "public/TankAimingComponent.h"
-#include "Public/TankPlayerController.h"
+#include "TankAimingComponent.h"
+#include "TankPlayerController.h"
 
 #define OUT
 

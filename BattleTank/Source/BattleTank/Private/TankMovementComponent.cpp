@@ -1,6 +1,7 @@
 // BattleTank by Mdelacruzmelo
 
-
+#include "BattleTank.h"
+#include "TankTrack.h"
 #include "TankMovementComponent.h"
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)

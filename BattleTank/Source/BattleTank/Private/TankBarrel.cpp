@@ -1,6 +1,6 @@
 // BattleTank by Mdelacruzmelo
 
-
+#include "BattleTank.h"
 #include "TankBarrel.h"
 
 void UTankBarrel::Elevate(float RelativeSpeed)

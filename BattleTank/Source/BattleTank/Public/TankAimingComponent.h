@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "TankBarrel.h"
-#include "TankTurret.h"
 #include "TankAimingComponent.generated.h"
 
 // Enums for aiming state
@@ -17,6 +15,10 @@ enum class EFiringState : uint8
 	Reloading
 };
 
+// Forward Declaration
+class UTankBarrel;
+class UTankTurret;
+class AProyectile;
 
 // Holds barrel's properties and Elevate method
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
@@ -30,19 +32,31 @@ public:
 
 	void AimAt(FVector HitLocation);
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+		void Fire();
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 		EFiringState FiringState = EFiringState::Aiming;
 
 private:
+	// Sets default values for this pawn's properties
 	UTankAimingComponent();
+
+	void MoveBarrelTowards(FVector AimDirection);
 
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 100000;
+		float LaunchSpeed = 4000;
 
-	void MoveBarrelTowards(FVector AimDirection);
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		TSubclassOf<AProyectile> ProyectileBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float ReloadTimeInSeconds = 3.f;
+
+	double LastFireTime = 0;
 
 };

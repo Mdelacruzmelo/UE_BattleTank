@@ -1,9 +1,11 @@
 // BattleTank by Mdelacruzmelo
 
-
-#include "Public/TankAimingComponent.h"
-#include "Components/StaticMeshComponent.h"
+#include "BattleTank.h"
+#include "TankBarrel.h"
+#include "TankTurret.h"
+#include "Proyectile.h"
 #include "Kismet/GameplayStatics.h"
+#include "TankAimingComponent.h"
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -21,7 +23,6 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 
 void UTankAimingComponent::AimAt(FVector HitLocation)
 {
-
 	if (ensure(Barrel) || ensure(Turret)) { return; }
 
 	FVector OutLaunchVelocity;
@@ -64,4 +65,22 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Barrel->Elevate(DeltaRotator.Pitch); // TODO Remove magic number
 	Turret->Rotate(DeltaRotator.Yaw); // TODO Remove magic number
 
+}
+
+void UTankAimingComponent::Fire()
+{
+	if (!ensure(Barrel && ProyectileBlueprint)) { return; }
+	bool isRealoaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+
+	if (isRealoaded)
+	{
+		// Spawn a prooyectile at the socket location
+		auto Proyectile = GetWorld()->SpawnActor<AProyectile>(
+			ProyectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+			);
+		Proyectile->LaunchProyectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
