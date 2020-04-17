@@ -1,27 +1,26 @@
 // BattleTank by Mdelacruzmelo
 
 #include "BattleTank.h"
-#include "Engine/World.h"
-#include "Public/TankAIController.h"
+#include "TankAimingComponent.h"
+#include "TankAIController.h"
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	auto ControlledTank = Cast<ATank>(GetPawn());
+	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto ControlledTank = GetPawn();
 
-	if (ensure(PlayerTank)) {
+	if (!ensure(PlayerTank) && !ensure(ControlledTank)) { return; }
 
-		// Move towards the player
-		MoveToActor(PlayerTank,AcceptanceRadius);
+	// Move towards the player
+	MoveToActor(PlayerTank, AcceptanceRadius);
 
-		// Aim toaerds the player
-		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	// Aim toaerds the player
+	auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
+	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
-		// Fire if ready
-		ControlledTank->Fire(); // TODO: Limit firing rate
-
-	}
+	// TODO fix firing
+	// ControlledTank->Fire();
 
 }
