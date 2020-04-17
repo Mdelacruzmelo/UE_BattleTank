@@ -1,6 +1,5 @@
 // BattleTank by Mdelacruzmelo
 
-#include "BattleTank.h"
 #include "TankTrack.h"
 
 void UTankTrack::SetThrottle(float Throttle)

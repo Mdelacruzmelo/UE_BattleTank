@@ -1,6 +1,5 @@
 // BattleTank by Mdelacruzmelo
 
-#include "BattleTank.h"
 #include "TankAimingComponent.h"
 #include "TankAIController.h"
 

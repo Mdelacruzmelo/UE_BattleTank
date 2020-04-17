@@ -1,6 +1,5 @@
 // BattleTank by Mdelacruzmelo
 
-#include "BattleTank.h"
 #include "GameFramework/PlayerController.h"
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
@@ -32,7 +31,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		AimingComponent ->AimAt(HitLocation);
+		AimingComponent->AimAt(HitLocation);
 	}
 }
 
