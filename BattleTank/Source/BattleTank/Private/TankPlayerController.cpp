@@ -3,6 +3,7 @@
 #include "BattleTank.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
+#include "public/TankAimingComponent.h"
 #include "Public/TankPlayerController.h"
 
 #define OUT
@@ -10,7 +11,7 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 	FoundAimingComponent(AimingComponent);
 
@@ -22,26 +23,17 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrosshair();
 }
 
-
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
 // Start the tan movin the barrel so that a shot would it where the crosshair inersects the world
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(!GetControlledTank())) { return; }
+	UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 
-	FVector HitLocation; // OUT Parameter
+	FVector HitLocation;
 
-	// If it hits the ladscape
-	if (GetSightRayHitLocation(HitLocation)) // Has "ide-effect", is going to line trace
+	if (GetSightRayHitLocation(HitLocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
-		// TODO: Tell controlled tank to aim at this point
-		GetControlledTank()->AimAt(HitLocation);
-
+		AimingComponent ->AimAt(HitLocation);
 	}
 }
 
