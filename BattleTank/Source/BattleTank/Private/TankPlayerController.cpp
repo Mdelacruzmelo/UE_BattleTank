@@ -24,11 +24,11 @@ void ATankPlayerController::Tick(float DeltaTime)
 // Start the tan movin the barrel so that a shot would it where the crosshair inersects the world
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!GetPawn()) { return; } // e.g. if not possessing
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 
 	FVector HitLocation;
-
 	if (GetSightRayHitLocation(HitLocation))
 	{
 		AimingComponent->AimAt(HitLocation);
