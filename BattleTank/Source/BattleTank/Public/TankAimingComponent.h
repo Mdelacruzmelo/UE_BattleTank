@@ -43,6 +43,8 @@ private:
 	// Sets default values for this pawn's properties
 	UTankAimingComponent();
 
+	bool IsBarrelMoving();
+
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
 	virtual void BeginPlay() override;
@@ -63,4 +65,5 @@ private:
 
 	double LastFireTime = 0;
 
+	FVector AimDirection;
 };
