@@ -22,7 +22,7 @@ float ATank::TakeDamage(
 
 	CurrentHealth -= DamageToApply;
 	if (CurrentHealth <= 0) {
-		OnDeath.BroadCast();
+		OnDeath.Broadcast();
 	}
 
 	return DamageToApply;
@@ -31,4 +31,4 @@ float ATank::TakeDamage(
 float ATank::GetHealthPercentage() const
 {
 	return (float)CurrentHealth / (float)StartingtHealth;
-}
+} 
