@@ -21,10 +21,14 @@ public:
 		AActor* DamageCauser
 	);
 
+	// Returns current health as a percentage as a percentage of starting health, between 0 and 1
+	UFUNCTION(BlueprintPure, Category = "Health")
+		float GetHealthPercentage() const;
+
+private:
 	// Sets default values for this pawn's properties
 	ATank();
 
-private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		int32 StartingtHealth = 100;
 
