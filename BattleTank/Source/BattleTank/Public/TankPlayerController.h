@@ -25,6 +25,10 @@ public:
 
 	virtual void BeginPlay() override;
 
+	void SetPawn(APawn* InPawn);
+
+	void OnPossedTankDeath();
+
 	virtual void Tick(float DeltaTime) override;
 
 	void AimTowardsCrosshair();
